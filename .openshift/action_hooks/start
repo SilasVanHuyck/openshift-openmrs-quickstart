@@ -3,6 +3,11 @@
 # script. The application will work only if it binds to
 # $OPENSHIFT_DIY_IP:8080
 set -x
+
+mkdir $OPENSHIFT_DATA_DIR/openmrs
+echo ""$OPENSHIFT_DATA_DIR"openmrs/openmrs-runtime.properties" > ~/.env/user_vars/OPENMRS_RUNTIME_PROPERTIES_FILE
+echo "application_data_directory="$OPENSHIFT_DATA_DIR"openmrs" > $OPENSHIFT_DATA_DIR/openmrs/openmrs-runtime.properties
+
 rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/openmrs/tomcat/conf/ ${OPENSHIFT_DATA_DIR}/tomcat/conf/
 rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/openmrs/tomcat/lib/ ${OPENSHIFT_DATA_DIR}/tomcat/lib/
 rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/openmrs/tomcat/webapps/ ${OPENSHIFT_DATA_DIR}/tomcat/webapps/
