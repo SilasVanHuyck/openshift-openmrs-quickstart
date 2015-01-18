@@ -8,7 +8,7 @@ if [ -d $OPENSHIFT_DATA_DIR/tomcat ]
 then
     exit 0
 else
-    cp -rf $OPENSHIFT_REPO_DIR/diy/tomcat $OPENSHIFT_DATA_DIR
+    cp -rf $OPENSHIFT_REPO_DIR/openmrs/tomcat $OPENSHIFT_DATA_DIR
     cd $OPENSHIFT_DATA_DIR/tomcat
     rm -rf logs
     ln -s $OPENSHIFT_LOG_DIR logs
