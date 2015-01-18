@@ -7,6 +7,10 @@ set -x
 mkdir $OPENSHIFT_DATA_DIR/openmrs
 echo ""$OPENSHIFT_DATA_DIR"openmrs/openmrs-runtime.properties" > ~/.env/user_vars/OPENMRS_RUNTIME_PROPERTIES_FILE
 echo "application_data_directory="$OPENSHIFT_DATA_DIR"openmrs" > $OPENSHIFT_DATA_DIR/openmrs/openmrs-runtime.properties
+echo "### Database connection properties
+connection.username=$OPENSHIFT_MYSQL_DB_USERNAME
+connection.password=$OPENSHIFT_MYSQL_DB_PASSWORD
+connection.url=jdbc:mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/$OPENSHIFT_APP_NAME?autoReconnect=true" >> $OPENSHIFT_DATA_DIR/openmrs/openmrs-runtime.properties
 
 rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/openmrs/tomcat/conf/ ${OPENSHIFT_DATA_DIR}/tomcat/conf/
 rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/openmrs/tomcat/lib/ ${OPENSHIFT_DATA_DIR}/tomcat/lib/
